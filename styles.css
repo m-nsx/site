@@ -1,5 +1,19 @@
+@font-face {
+  font-family: 'Nexa';
+  src: url('assets/fonts/nexa/Nexa-Heavy.ttf') format('truetype');
+  font-weight: 900; /* Heavy */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Interphrases-Bold';
+  src: url('assets/fonts/interphrases-pro/TT\ Interphases\ Pro\ Trial\ Bold.ttf') format('truetype');
+  font-weight: 900; /* Heavy */
+  font-style: normal;
+}
+
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Interphrases-Bold', sans-serif;
     background-color: #000000;
     margin: 0;
     padding: 0;
@@ -20,24 +34,140 @@ nav {
     flex-direction: column;
 }
 
-/* Zone cliquable du haut */
+/* Zone cliquable du haut - Menu Hamburger */
 .nav-top-zone {
     height: 15%;
     background: #ff6b6b;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: bold;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
+    position: relative;
 }
 
 .nav-top-zone:hover {
     background: #ff5252;
 }
+
+/* Icône hamburger */
+.hamburger-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    transform: rotate(90deg);
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger-line:nth-child(1) {
+    top: 0;
+}
+
+.hamburger-line:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hamburger-line:nth-child(3) {
+    bottom: 0;
+}
+
+/* Animation hamburger vers X */
+.hamburger-icon.active .hamburger-line:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.hamburger-icon.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-icon.active .hamburger-line:nth-child(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+/* Container pour les tuiles */
+.tiles-container {
+    position: fixed;
+    top: 2vh;
+    right: 0%;
+    width: 300px;
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* Tuiles individuelles */
+.tile {
+    width: 280px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    background: #666666;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    pointer-events: all;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateX(400px);
+}
+
+.tile:hover {
+    transform: translateX(0) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation d'entrée des tuiles */
+.tile.slide-in {
+    animation: slideInFromRight 0.6s ease-out forwards;
+}
+
+/* Animation de sortie des tuiles */
+.tile.slide-out {
+    animation: slideOutToRight 0.6s ease-in forwards;
+}
+
+/* Keyframes pour les animations */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(400px);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutToRight {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(400px);
+        opacity: 1;
+    }
+}
+
+/* (Anciennes animations de chute supprimées pour remplacer par translation horizontale) */
 
 /* Zone du menu principal */
 .nav-menu-zone {

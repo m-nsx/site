@@ -7,9 +7,13 @@
 </head>
 <body>
     <nav>
-        <!-- Zone cliquable du haut -->
-        <div class="nav-top-zone" onclick="handleTopZoneClick()">
-            TOP
+        <!-- Zone cliquable du haut avec menu hamburger -->
+        <div class="nav-top-zone" onclick="toggleMenu()">
+            <div class="hamburger-icon" id="hamburgerIcon">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
         </div>
         
         <!-- Zone du menu principal -->
@@ -27,6 +31,14 @@
             BOT
         </div>
     </nav>
+
+    <!-- Container pour les tuiles animées -->
+    <div class="tiles-container" id="tilesContainer">
+        <div class="tile" onclick="handleTileClick('Portfolio')">Portfolio</div>
+        <div class="tile" onclick="handleTileClick('Blog')">Blog</div>
+        <div class="tile" onclick="handleTileClick('Galerie')">Galerie</div>
+        <div class="tile" onclick="handleTileClick('Contact')">Contact+</div>
+    </div>
     <div class="main-content">
         <!-- Contenu principal ici -->
         <h1>Bienvenue sur mon site</h1>
@@ -34,10 +46,48 @@
     </div>
 
     <script>
-        function handleTopZoneClick() {
-            alert('Zone du haut cliquée !');
-            // Vous pouvez remplacer cette alerte par l'action souhaitée
-            // Par exemple : window.location.href = 'page-speciale.html';
+        let menuOpen = false;
+        
+        function toggleMenu() {
+            const hamburgerIcon = document.getElementById('hamburgerIcon');
+            const tilesContainer = document.getElementById('tilesContainer');
+            const tiles = tilesContainer.querySelectorAll('.tile');
+            
+            if (!menuOpen) {
+                // Ouvrir le menu - apparition des tuiles
+                hamburgerIcon.classList.add('active');
+                tiles.forEach(tile => {
+                    tile.classList.remove('slide-out');
+                    void tile.offsetWidth; // force reflow pour rejouer l'anim si besoin
+                    tile.classList.add('slide-in');
+                });
+                menuOpen = true;
+            } else {
+                // Fermer le menu - translation des tuiles vers la droite derrière la barre
+                hamburgerIcon.classList.remove('active');
+                tiles.forEach(tile => {
+                    tile.classList.remove('slide-in');
+                    tile.classList.add('slide-out');
+                });
+                // Reset après l'animation de sortie
+                setTimeout(() => {
+                    tiles.forEach(tile => {
+                        tile.classList.remove('slide-out');
+                        tile.style.transform = 'translateX(400px)';
+                        tile.style.opacity = '0';
+                    });
+                }, 800); // correspond à la durée de slide-out
+                menuOpen = false;
+            }
+        }
+
+        function handleTileClick(tileName) {
+            alert(`Tuile "${tileName}" cliquée !`);
+            // Vous pouvez ajouter ici la logique spécifique à chaque tuile
+            // Par exemple :
+            // if (tileName === 'Portfolio') {
+            //     window.location.href = 'portfolio.html';
+            // }
         }
 
         function handleBottomZoneClick() {
