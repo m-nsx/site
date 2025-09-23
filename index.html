@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Vide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <!-- Zone cliquable du haut -->
+        <div class="nav-top-zone" onclick="handleTopZoneClick()">
+            TOP
+        </div>
+        
+        <!-- Zone du menu principal -->
+        <div class="nav-menu-zone">
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        
+        <!-- Zone cliquable du bas -->
+        <div class="nav-bottom-zone" onclick="handleBottomZoneClick()">
+            BOT
+        </div>
+    </nav>
+    <div class="main-content">
+        <!-- Contenu principal ici -->
+        <h1>Bienvenue sur mon site</h1>
+        <p>Votre contenu principal va ici...</p>
+    </div>
+
+    <script>
+        function handleTopZoneClick() {
+            alert('Zone du haut cliquée !');
+            // Vous pouvez remplacer cette alerte par l'action souhaitée
+            // Par exemple : window.location.href = 'page-speciale.html';
+        }
+
+        function handleBottomZoneClick() {
+            alert('Zone du bas cliquée !');
+            // Vous pouvez remplacer cette alerte par l'action souhaitée
+            // Par exemple : window.open('https://example.com', '_blank');
+        }
+    </script>
+</body>
+</html>
