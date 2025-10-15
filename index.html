@@ -1,100 +1,270 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Page Vide</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liens — Page d'accueil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <!-- Zone cliquable du haut avec menu hamburger -->
-        <div class="nav-top-zone" onclick="toggleMenu()">
-            <div class="hamburger-icon" id="hamburgerIcon">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </div>
-        </div>
-        
-        <!-- Zone du menu principal -->
-        <div class="nav-menu-zone">
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">À propos</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        
-        <!-- Zone cliquable du bas -->
-        <div class="nav-bottom-zone" onclick="handleBottomZoneClick()">
-            BOT
-        </div>
+  <main class="card" role="main">
+    <header class="header">
+      <div class="avatar" aria-hidden="true">
+        <!-- replace src with your photo or logo -->
+        <img src="media/pp.jpg" alt="Avatar">
+      </div>
+      <div class="who">
+        <h1>Titouan Verdier</h1>
+        <p>Étudiant ingénieur en télécommunications à l'INSA Lyon</p>
+      </div>
+    </header>
+
+    <nav class="links" aria-label="Liens principaux">
+      <!-- CV (ex: PDF hébergé dans le repo ou sur un service) -->
+      <a class="link-btn" href="docs/cv.pdf" download aria-label="Télécharger mon CV" data-variant="solid" target="_blank">
+        <!-- <span class="icon" aria-hidden="true">📄</span> -->
+        <span class="label">CV - français</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- Exemple: profil linkedin -->
+      <a class="link-btn" href="https://www.linkedin.com/in/titouan-verdier-97029a267/" target="_blank" rel="noopener noreferrer">
+        <!-- <span class="icon" aria-hidden="true">🔗</span> -->
+        <span class="label">LinkedIn</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- Exemple: GitHub -->
+      <a class="link-btn" href="https://github.com/m-nsx" target="_blank" rel="noopener noreferrer">
+        <!-- <span class="icon" aria-hidden="true">🐙</span> -->
+        <span class="label">GitHub</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- Exemple: portfolio -->
+      <a class="link-btn" href="https://linktr.ee/mnsx" target="_blank" rel="noopener noreferrer" style="border-radius:12px;">
+        <!-- <span class="icon" aria-hidden="true">💼</span> -->
+        <span class="label">Portfolio</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- Exemple: contact mailto -->
+      <a class="link-btn" href="mailto:titouan.verdier@insa-lyon.fr" data-variant="muted">
+        <!-- <span class="icon" aria-hidden="true">✉️</span> -->
+        <span class="label">Contact - mail</span>
+        <span class="arrow">→</span>
+      </a>
     </nav>
 
-    <!-- Container pour les tuiles animées -->
-    <div class="tiles-container" id="tilesContainer">
-        <div class="tile" onclick="handleTileClick('Portfolio')">Portfolio</div>
-        <div class="tile" onclick="handleTileClick('Blog')">Blog</div>
-        <div class="tile" onclick="handleTileClick('Galerie')">Galerie</div>
-        <div class="tile" onclick="handleTileClick('Contact')">Contact+</div>
-    </div>
-    <div class="main-content">
-        <!-- Contenu principal ici -->
-        <h1>Bienvenue sur mon site</h1>
-        <p>Votre contenu principal va ici...</p>
-    </div>
+    <p class="sub"></p>
+  </main>
 
-    <script>
-        let menuOpen = false;
-        
-        function toggleMenu() {
-            const hamburgerIcon = document.getElementById('hamburgerIcon');
-            const tilesContainer = document.getElementById('tilesContainer');
-            const tiles = tilesContainer.querySelectorAll('.tile');
-            
-            if (!menuOpen) {
-                // Ouvrir le menu - apparition des tuiles
-                hamburgerIcon.classList.add('active');
-                tiles.forEach(tile => {
-                    tile.classList.remove('slide-out');
-                    void tile.offsetWidth; // force reflow pour rejouer l'anim si besoin
-                    tile.classList.add('slide-in');
-                });
-                menuOpen = true;
-            } else {
-                // Fermer le menu - translation des tuiles vers la droite derrière la barre
-                hamburgerIcon.classList.remove('active');
-                tiles.forEach(tile => {
-                    tile.classList.remove('slide-in');
-                    tile.classList.add('slide-out');
-                });
-                // Reset après l'animation de sortie
-                setTimeout(() => {
-                    tiles.forEach(tile => {
-                        tile.classList.remove('slide-out');
-                        tile.style.transform = 'translateX(400px)';
-                        tile.style.opacity = '0';
-                    });
-                }, 800); // correspond à la durée de slide-out
-                menuOpen = false;
+  <script>
+    // Usage (console): addLink({href:'https://...', label:'Mon lien', icon:'⭐', variant:'muted'})
+    window.addLink = function(o){
+      if(!o||!o.href) return;
+      const nav = document.querySelector('.links');
+      const a = document.createElement('a'); a.className='link-btn'; a.href=o.href; a.target='_blank'; a.rel='noopener noreferrer';
+      if(o.variant) a.setAttribute('data-variant', o.variant);
+      a.innerHTML = `<span class=\"icon\" aria-hidden=\"true\">${o.icon||'🔗'}</span>`+
+                    `<span class=\"label\">${o.label||o.href}</span>`+
+                    `<span class=\"arrow\">→</span>`;
+      nav.appendChild(a);
+      return a;
+    }
+  </script>
+  <!-- Particles: canvas + inline script -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <div id="rainbow-overlay" aria-hidden="true"></div>
+  <script>
+    (function(){
+      // Minimal performant particle system + rainbow overlay triggered by keywords
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      const rainbowOverlay = document.getElementById('rainbow-overlay');
+      let DPR = Math.max(1, window.devicePixelRatio || 1);
+      let width = 0, height = 0;
+
+      function resize(){
+        DPR = Math.max(1, window.devicePixelRatio || 1);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        canvas.width = Math.floor(width * DPR);
+        canvas.height = Math.floor(height * DPR);
+        ctx.setTransform(1,0,0,1,0,0);
+        ctx.scale(DPR, DPR);
+      }
+
+      // particle pool for re-use
+      const MAX = 250;
+      const particles = [];
+      for(let i=0;i<MAX;i++) particles.push({alive:false});
+
+      function spawn(x,y){
+        // only spawn when particlesEnabled
+        if(!particlesEnabled) return;
+        for(let i=0;i<MAX;i++){
+          const p = particles[i];
+          if(!p.alive){
+            p.alive = true;
+            p.x = x;
+            p.y = y;
+            const speed = 0.5 + Math.random()*2.5;
+            const angle = (Math.random()*Math.PI*2);
+            p.vx = Math.cos(angle)*speed;
+            p.vy = Math.sin(angle)*speed - (Math.random()*1);
+            p.life = 600 + Math.random()*600; // ms
+            p.size = 1 + Math.random()*3.5;
+            p.birth = performance.now();
+            p.hue = 190 + Math.random()*60; // bluish hues
+            return;
+          }
+        }
+      }
+
+      // activation via keyboard keywords
+      let particlesEnabled = false;
+      let rainbowEnabled = false;
+      let vineEnabled = false;
+      const KEY_PART = 'particules';
+      const KEY_RAIN = 'rainbow';
+      const KEY_VINE = 'vine';
+      let keyBuf = '';
+      const MAXKEY = Math.max(KEY_PART.length, KEY_RAIN.length, KEY_VINE.length);
+
+      // Preload vine audio base (will be cloned for overlapping playback)
+      let vineAudioBase = null;
+      try {
+        vineAudioBase = new Audio('media/vine.mp3');
+        vineAudioBase.preload = 'auto';
+        vineAudioBase.volume = 0.9;
+      } catch(e){ vineAudioBase = null; }
+
+      let lastVinePlay = 0; // ms timestamp for throttling vine plays
+
+      window.addEventListener('keydown', (ev) => {
+        const k = ev.key;
+        if(k === 'Escape'){
+          // disable all
+          particlesEnabled = false;
+          rainbowEnabled = false;
+          vineEnabled = false;
+          document.body.classList.remove('rainbow-active');
+          return;
+        }
+        // accept letters and accented letters
+        if(k.length === 1 && /[a-zA-Zàâçéèêëîïôûùüÿñæœ]/i.test(k)){
+          keyBuf += k.toLowerCase();
+          if(keyBuf.length > MAXKEY) keyBuf = keyBuf.slice(-MAXKEY);
+
+          if(!particlesEnabled && keyBuf.endsWith(KEY_PART)){
+            particlesEnabled = true;
+            console.info('Particules activées');
+            const cx = window.innerWidth/2, cy = window.innerHeight/2;
+            for(let i=0;i<30;i++) spawn(cx + (Math.random()-0.5)*80, cy + (Math.random()-0.5)*80);
+          }
+
+          if(keyBuf.endsWith(KEY_RAIN)){
+            rainbowEnabled = !rainbowEnabled;
+            document.body.classList.toggle('rainbow-active', rainbowEnabled);
+            console.info('Rainbow mode', rainbowEnabled ? 'ON' : 'OFF');
+          }
+
+          if(!vineEnabled && keyBuf.endsWith(KEY_VINE)){
+            vineEnabled = true;
+            console.info('Vine sound activé');
+            // attempt to unlock audio by playing a silent clone (some browsers require user gesture)
+            if(vineAudioBase){
+              const unlock = vineAudioBase.cloneNode();
+              unlock.volume = 0;
+              unlock.play().catch(()=>{});
             }
+          }
+
+        } else if(k === 'Backspace'){
+          keyBuf = keyBuf.slice(0, -1);
+        }
+      }, {passive:true});
+
+      let lastMove = 0;
+      let active = true;
+
+      function onMove(e){
+        if(!particlesEnabled && !vineEnabled) return; // ignore until keyword typed
+        const now = performance.now();
+        lastMove = now;
+        const touches = e.touches ? e.touches : [e];
+        for(const t of touches){
+          const rect = canvas.getBoundingClientRect();
+          const x = (t.clientX - rect.left);
+          const y = (t.clientY - rect.top);
+          // spawn a few particles per event for density
+          for(let i=0;i<3;i++) spawn(x + (Math.random()-0.5)*8, y + (Math.random()-0.5)*8);
+        }
+        // play vine sound (throttled) when enabled
+        if(vineEnabled && vineAudioBase){
+          const nowms = performance.now();
+          if(nowms - lastVinePlay > 180){ // throttle to ~5-6 plays/sec
+            lastVinePlay = nowms;
+            const a = vineAudioBase.cloneNode();
+            a.volume = 0.9;
+            a.play().catch(()=>{});
+          }
+        }
+      }
+
+      // pointer & touch
+      window.addEventListener('mousemove', onMove, {passive:true});
+      window.addEventListener('touchmove', onMove, {passive:true});
+
+      // animation loop
+      let last = performance.now();
+      function tick(now){
+        const dt = now - last;
+        last = now;
+
+        ctx.clearRect(0,0,width,height);
+
+        for(let i=0;i<MAX;i++){
+          const p = particles[i];
+          if(!p.alive) continue;
+          const age = now - p.birth;
+          const t = age / p.life;
+          if(t >= 1){ p.alive = false; continue; }
+          // simple physics
+          p.vy += 0.0025 * dt; // gravity-ish
+          p.x += p.vx * (dt/16);
+          p.y += p.vy * (dt/16);
+
+          const alpha = 1 - Math.pow(t, 1.2);
+          const size = p.size * (1 - t);
+
+          ctx.beginPath();
+          ctx.fillStyle = `hsla(${p.hue},80%,60%,${alpha})`;
+          ctx.arc(p.x, p.y, size, 0, Math.PI*2);
+          ctx.fill();
         }
 
-        function handleTileClick(tileName) {
-            alert(`Tuile "${tileName}" cliquée !`);
-            // Vous pouvez ajouter ici la logique spécifique à chaque tuile
-            // Par exemple :
-            // if (tileName === 'Portfolio') {
-            //     window.location.href = 'portfolio.html';
-            // }
+        // sleep the loop when inactive to save CPU
+        if(performance.now() - lastMove > 2500 && active){
+          active = false;
+          setTimeout(()=>{ requestAnimationFrame(tick); last = performance.now(); }, 1000);
+          return;
         }
 
-        function handleBottomZoneClick() {
-            alert('Zone du bas cliquée !');
-            // Vous pouvez remplacer cette alerte par l'action souhaitée
-            // Par exemple : window.open('https://example.com', '_blank');
-        }
-    </script>
+        requestAnimationFrame(tick);
+      }
+
+      // start
+      resize();
+      window.addEventListener('resize', resize, {passive:true});
+      requestAnimationFrame(tick);
+    })();
+  </script>
 </body>
 </html>
