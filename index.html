@@ -3,13 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Liens — Page d'accueil</title>
+  <title data-i18n="pageTitle">Liens — Page d'accueil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="language-switcher" role="group" aria-label="Choisir la langue" data-i18n-aria-label="languageSelector">
+    <button class="language-button is-active" type="button" data-language="fr" aria-label="Français" aria-pressed="true" title="Français">
+      <span aria-hidden="true">🇫🇷</span>
+      <span class="sr-only">Français</span>
+    </button>
+    <button class="language-button" type="button" data-language="en" aria-label="English" aria-pressed="false" title="English">
+      <span aria-hidden="true">🇬🇧</span>
+      <span class="sr-only">English</span>
+    </button>
+    <button class="language-button" type="button" data-language="de" aria-label="Deutsch" aria-pressed="false" title="Deutsch">
+      <span aria-hidden="true">🇩🇪</span>
+      <span class="sr-only">Deutsch</span>
+    </button>
+    <button class="language-button" type="button" data-language="ko" aria-label="한국어" aria-pressed="false" title="한국어">
+      <span aria-hidden="true">🇰🇷</span>
+      <span class="sr-only">한국어</span>
+    </button>
+    <button class="language-button" type="button" data-language="ja" aria-label="日本語" aria-pressed="false" title="日本語">
+      <span aria-hidden="true">🇯🇵</span>
+      <span class="sr-only">日本語</span>
+    </button>
+  </div>
   <main class="card" role="main">
     <header class="header">
       <div class="avatar" aria-hidden="true">
@@ -18,43 +40,55 @@
       </div>
       <div class="who">
         <h1>Titouan Verdier</h1>
-        <p>Étudiant ingénieur en télécommunications à l'INSA Lyon</p>
+        <p data-i18n="subtitle">Étudiant ingénieur en télécommunications à l'INSA Lyon</p>
       </div>
     </header>
 
-    <nav class="links" aria-label="Liens principaux">
+    <nav class="links" aria-label="Liens principaux" data-i18n-aria-label="mainLinks">
       <!-- CV (ex: PDF hébergé dans le repo ou sur un service) -->
-      <a class="link-btn" href="docs/cv_v1.pdf" download aria-label="Télécharger mon CV" data-variant="solid" target="_blank">
+      <a class="link-btn" href="docs/cv_v2.pdf" download aria-label="Télécharger mon CV" data-i18n-aria-label="downloadFrenchCv" data-variant="solid" target="_blank">
         <!-- <span class="icon" aria-hidden="true">📄</span> -->
-        <span class="label">CV - français</span>
+        <span class="label" data-i18n="frenchCv">CV - français</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-btn" href="docs/cv_v2_ev.pdf" download aria-label="Download my CV" data-i18n-aria-label="downloadEnglishCv" target="_blank">
+        <!-- <span class="icon" aria-hidden="true">📄</span> -->
+        <span class="label" data-i18n="englishCv">CV - english</span>
         <span class="arrow">→</span>
       </a>
 
       <!-- Exemple: profil linkedin -->
       <a class="link-btn" href="https://www.linkedin.com/in/titouan-verdier-97029a267/" target="_blank" rel="noopener noreferrer">
         <!-- <span class="icon" aria-hidden="true">🔗</span> -->
-        <span class="label">LinkedIn</span>
+        <span class="label" data-i18n="linkedin">LinkedIn</span>
         <span class="arrow">→</span>
       </a>
 
       <!-- Exemple: GitHub -->
       <a class="link-btn" href="https://github.com/m-nsx" target="_blank" rel="noopener noreferrer">
         <!-- <span class="icon" aria-hidden="true">🐙</span> -->
-        <span class="label">GitHub</span>
+        <span class="label" data-i18n="github">GitHub</span>
         <span class="arrow">→</span>
       </a>
 
       <!-- Exemple: portfolio -->
       <a class="link-btn" href="https://linktr.ee/mnsx" target="_blank" rel="noopener noreferrer" style="border-radius:12px;">
         <!-- <span class="icon" aria-hidden="true">💼</span> -->
-        <span class="label">Portfolio</span>
+        <span class="label" data-i18n="portfolio">Portfolio</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-btn" href="https://music.mnsx.org" target="_blank" rel="noopener noreferrer" style="border-radius:12px;">
+        <!-- <span class="icon" aria-hidden="true">🎵</span> -->
+        <span class="label" data-i18n="music">Musique</span>
         <span class="arrow">→</span>
       </a>
 
       <!-- Exemple: contact mailto -->
       <a class="link-btn" href="mailto:titouan.verdier@insa-lyon.fr">
         <!-- <span class="icon" aria-hidden="true">✉️</span> -->
-        <span class="label">Contact - mail</span>
+        <span class="label" data-i18n="contact">Contact - mail</span>
         <span class="arrow">→</span>
       </a>
     </nav>
@@ -63,6 +97,110 @@
   </main>
 
   <script>
+    const translations = {
+      fr: {
+        pageTitle: "Liens — Page d'accueil",
+        languageSelector: "Choisir la langue",
+        mainLinks: "Liens principaux",
+        subtitle: "Étudiant ingénieur en télécommunications à l'INSA Lyon",
+        frenchCv: "CV - Français",
+        englishCv: "CV - Anglais",
+        downloadFrenchCv: "Télécharger mon CV en français",
+        downloadEnglishCv: "Télécharger mon CV en anglais",
+        linkedin: "LinkedIn",
+        github: "GitHub",
+        portfolio: "Portfolio",
+        music: "Musique",
+        contact: "Contact - mail"
+      },
+      en: {
+        pageTitle: "Links — Home page",
+        languageSelector: "Choose language",
+        mainLinks: "Main links",
+        subtitle: "Telecommunications engineering student at INSA Lyon",
+        frenchCv: "CV - French",
+        englishCv: "CV - English",
+        downloadFrenchCv: "Download my CV in French",
+        downloadEnglishCv: "Download my CV in English",
+        linkedin: "LinkedIn",
+        github: "GitHub",
+        portfolio: "Portfolio",
+        music: "Music",
+        contact: "Contact - email"
+      },
+      de: {
+        pageTitle: "Links — Startseite",
+        languageSelector: "Sprache auswählen",
+        mainLinks: "Hauptlinks",
+        subtitle: "Student der Telekommunikationstechnik an der INSA Lyon",
+        frenchCv: "Lebenslauf - Französisch",
+        englishCv: "Lebenslauf - Englisch",
+        downloadFrenchCv: "Meinen Lebenslauf auf Französisch herunterladen",
+        downloadEnglishCv: "Meinen Lebenslauf auf Englisch herunterladen",
+        linkedin: "LinkedIn",
+        github: "GitHub",
+        portfolio: "Portfolio",
+        music: "Musik",
+        contact: "Kontakt - E-Mail"
+      },
+      ko: {
+        pageTitle: "링크 — 홈 페이지",
+        languageSelector: "언어 선택",
+        mainLinks: "주요 링크",
+        subtitle: "INSA Lyon 통신공학 학생",
+        frenchCv: "이력서 - 프랑스어",
+        englishCv: "이력서 - 영어",
+        downloadFrenchCv: "프랑스어 이력서 다운로드",
+        downloadEnglishCv: "영어 이력서 다운로드",
+        linkedin: "LinkedIn",
+        github: "GitHub",
+        portfolio: "포트폴리오",
+        music: "음악",
+        contact: "이메일 문의"
+      },
+      ja: {
+        pageTitle: "リンク — ホームページ",
+        languageSelector: "言語を選択",
+        mainLinks: "メインリンク",
+        subtitle: "INSA Lyon 通信工学科の学生",
+        frenchCv: "履歴書 - フランス語",
+        englishCv: "履歴書 - 英語",
+        downloadFrenchCv: "フランス語の履歴書をダウンロード",
+        downloadEnglishCv: "英語の履歴書をダウンロード",
+        linkedin: "LinkedIn",
+        github: "GitHub",
+        portfolio: "ポートフォリオ",
+        music: "音楽",
+        contact: "メールで連絡"
+      }
+    };
+
+    function setLanguage(language) {
+      const selectedLanguage = translations[language] ? language : 'fr';
+      const dictionary = translations[selectedLanguage];
+
+      document.documentElement.lang = selectedLanguage;
+      document.querySelectorAll('[data-i18n]').forEach((element) => {
+        element.textContent = dictionary[element.dataset.i18n];
+      });
+      document.querySelectorAll('[data-i18n-aria-label]').forEach((element) => {
+        element.setAttribute('aria-label', dictionary[element.dataset.i18nAriaLabel]);
+      });
+      document.querySelectorAll('.language-button').forEach((button) => {
+        const isSelected = button.dataset.language === selectedLanguage;
+        button.classList.toggle('is-active', isSelected);
+        button.setAttribute('aria-pressed', String(isSelected));
+      });
+
+      localStorage.setItem('preferred-language', selectedLanguage);
+    }
+
+    document.querySelectorAll('.language-button').forEach((button) => {
+      button.addEventListener('click', () => setLanguage(button.dataset.language));
+    });
+
+    setLanguage(localStorage.getItem('preferred-language') || document.documentElement.lang);
+
     // Usage (console): addLink({href:'https://...', label:'Mon lien', icon:'⭐', variant:'muted'})
     window.addLink = function(o){
       if(!o||!o.href) return;
